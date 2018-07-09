@@ -5,8 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileNameDecoder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="文件名转码" Height="673" Width="741" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="RadioButton">
+            <Setter Property="Margin" Value="10,0,0,0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10" VerticalAlignment="Top">
+            <TextBox x:Name="TbPath" TextChanged="TbPath_TextChanged" FontSize="16"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <ComboBox x:Name="CbEncoding" Width="150" DisplayMemberPath="DisplayName" SelectionChanged="CbEncoding_SelectionChanged"/>
+                <RadioButton Name="RbAll" VerticalAlignment="Center" Content="所有项" IsChecked="True" Checked="Rb_Checked"/>
+                <RadioButton Name="RbSelf" VerticalAlignment="Center" Content="当前项" Checked="Rb_Checked"/>
+                <RadioButton Name="RbChildren" VerticalAlignment="Center" Content="子项" Checked="Rb_Checked"/>
+            </StackPanel>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text=">>>" FontSize="20"/>
+                <Button Content="移动" FontSize="16" Margin="0,10,0,0" Click="Move_Click"/>
+            </StackPanel>
+            <ListView x:Name="LvItems" Margin="10" DisplayMemberPath="SourceName"></ListView>
+            <ListView x:Name="LvNewItems" Grid.Column="2" Margin="10" DisplayMemberPath="DestName"></ListView>
+        </Grid>
     </Grid>
 </Window>
